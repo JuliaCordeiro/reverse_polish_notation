@@ -28,6 +28,4 @@ def reverse_polish_notation(output):
 
   return polish
 
-print(reverse_polish_notation("o1 = (i1 ^ i2) | (o1 ^ o2)"))
-
-
+print(reverse_polish_notation("o1 = (i1 ^ i2) | (o1 ^ i2)"))
