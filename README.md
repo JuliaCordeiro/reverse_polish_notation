@@ -1,2 +1,3 @@
-# reverse_polish_notation
-Create and resolve a reverse polish notation by a string
+# Reverse Polish Notation
+
+This repository is for a project to create a reverse polish notation and resolve that notation with inputs and outputs params.
