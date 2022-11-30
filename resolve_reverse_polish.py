@@ -1,20 +1,27 @@
 import constants
 
-def resolve(notation, inputs, outputs):
+def resolve(notation, inputs, outputs, booleans):
   in_out = []
   
   index = 0
+  notation_resolve = []
 
   while(index < len(notation)):
     if notation[index] not in constants.OPERATORS:
-      address = int(notation[index][1])
-      if notation[index][0] == 'i':
-        notation[index] = inputs[address - 1]
-      elif notation[index][0] == 'o':
-        notation[index] = outputs[address - 1]
+        address = int(notation[index][1])
+        if notation[index][0] == 'I':
+            notation_resolve.insert(index, inputs[address - 1])
+        elif notation[index][0] == 'O':
+            notation_resolve.insert(index, outputs[address - 1])
+        elif notation[index][0] == 'B':
+            if len(notation[index]) == 3:
+                address = int(notation[index][1::])
+            notation_resolve.insert(index, booleans[address - 1])
+    else:
+        notation_resolve.insert(index, notation[index])
     index += 1
 
-  for item in notation:
+  for item in notation_resolve:
     if item not in constants.OPERATORS:
       in_out.append(item)
     else:
@@ -32,10 +39,11 @@ def resolve(notation, inputs, outputs):
           operation = frist_op or second_op
           in_out.append(operation)
 
-  return in_out
+  return in_out[0]
 
-notation = ['i1', 'i2', '^', 'o1', 'i2', '^', '|']
+notation = ['I1', 'B16', '^', 'O1', 'I2', '^', '|']
 inputs = [True, False]
 outputs = [True]
+booleans = [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True]
 
-print(resolve(notation, inputs, outputs))
+print(resolve(notation, inputs, outputs, booleans))
